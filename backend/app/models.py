@@ -11,7 +11,7 @@ class User:
         self.experience = 0
         self.badges = []
         self.milestones = []
-        self.preferences = None  # Will store UserPreferences object
+        self.preferences = None 
 
 class UserPreferences:
     def __init__(self, age_group, dietary_preference, fitness_goal):

@@ -1,0 +1,73 @@
+
+/* challenge resize */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .header h1 {
+    font-size: 1.3rem;
+  }
+  
+  .tabs {
+    flex-direction: column;
+  }
+  
+  .challenges-grid,
+  .user-challenges-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .daily-progress {
+    justify-content: center;
+  }
+} 
+
+
+
+/* Badge resize  */
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .header h1 {
+    font-size: 1.3rem;
+  }
+  
+  .tabs {
+    flex-direction: column;
+  }
+  
+  .level-info {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .exp-bar {
+    width: 100%;
+    max-width: 250px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .badges-grid,
+  .milestones-grid {
+    grid-template-columns: 1fr;
+  }
+}

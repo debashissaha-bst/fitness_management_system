@@ -1,382 +1,282 @@
 .challenges-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #f5f5f5;
   padding: 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 20px;
-  border-radius: 15px;
-  backdrop-filter: blur(10px);
-}
-
-.back-btn {
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 25px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: all 0.3s ease;
-}
-
-.back-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: translateY(-2px);
+  margin-bottom: 20px;
+  background: white;
+  padding: 15px;
+  border-radius: 5px;
 }
 
 .header h1 {
-  color: white;
   margin: 0;
-  font-size: 2.5rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  font-size: 1.5rem;
 }
 
-.create-task-btn {
-  background: linear-gradient(45deg, #28a745, #20c997);
-  color: white;
+.back-btn, .create-task-btn, .join-btn, .complete-task-btn {
+  background: #007bff;
   border: none;
-  padding: 12px 24px;
-  border-radius: 25px;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 3px;
   cursor: pointer;
-  font-size: 16px;
-  transition: all 0.3s ease;
 }
 
-.create-task-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+.create-task-btn, .join-btn, .complete-task-btn {
+  background: #28a745;
+}
+
+.join-btn, .complete-task-btn {
+  width: 100%;
 }
 
 .tabs {
   display: flex;
-  gap: 10px;
-  margin-bottom: 30px;
-  background: rgba(255, 255, 255, 0.1);
+  gap: 5px;
+  margin-bottom: 20px;
+  background: white;
   padding: 10px;
-  border-radius: 15px;
-  backdrop-filter: blur(10px);
+  border-radius: 5px;
 }
 
 .tab {
-  background: rgba(255, 255, 255, 0.2);
+  background: #f8f9fa;
   border: none;
-  color: white;
-  padding: 12px 24px;
-  border-radius: 25px;
+  padding: 8px 16px;
+  border-radius: 3px;
   cursor: pointer;
-  font-size: 16px;
-  transition: all 0.3s ease;
   flex: 1;
 }
 
-.tab:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: translateY(-2px);
-}
-
 .tab.active {
-  background: linear-gradient(45deg, #667eea, #764ba2);
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  background: #007bff;
+  color: white;
 }
 
 .content {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
-  padding: 30px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
+  background: white;
+  border-radius: 5px;
+  padding: 20px;
 }
 
-/* Available Challenges Grid */
-.challenges-grid {
+.challenges-grid, .user-challenges-grid, .tasks-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 25px;
-}
-
-.challenge-card {
-  background: #f8f9fa;
-  border-radius: 20px;
-  padding: 25px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  border-left: 4px solid #667eea;
-}
-
-.challenge-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-
-.challenge-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.challenge-header h3 {
-  color: #333;
-  margin: 0;
-  font-size: 1.4rem;
-}
-
-.challenge-type {
-  background: linear-gradient(45deg, #667eea, #764ba2);
-  color: white;
-  padding: 6px 12px;
-  border-radius: 15px;
-  font-size: 0.8rem;
-  font-weight: 500;
-  text-transform: uppercase;
-}
-
-.challenge-description {
-  color: #666;
-  margin-bottom: 20px;
-  line-height: 1.5;
-}
-
-.challenge-details {
-  display: flex;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 15px;
-  margin-bottom: 20px;
 }
 
-.duration, .requirements {
-  background: #e9ecef;
-  color: #495057;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-.join-btn {
-  background: linear-gradient(45deg, #28a745, #20c997);
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 25px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: all 0.3s ease;
-  width: 100%;
-}
-
-.join-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
-}
-
-/* User Challenges Grid */
-.user-challenges-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-  gap: 25px;
+.challenge-card, .user-challenge-card, .task-card {
+  background: #f8f9fa;
+  border-radius: 5px;
+  padding: 15px;
+  border-left: 3px solid #007bff;
 }
 
 .user-challenge-card {
-  background: #f8f9fa;
-  border-radius: 20px;
-  padding: 25px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  border-left: 4px solid #ffd700;
+  border-left-color: #ffc107;
 }
 
-.user-challenge-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+.task-card {
+  border-left-color: #17a2b8;
 }
 
-.status {
-  padding: 6px 12px;
-  border-radius: 15px;
+.task-card.completed {
+  border-left-color: #28a745;
+  opacity: 0.8;
+}
+
+.challenge-header, .task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.challenge-header h3, .task-header h4 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.challenge-type, .status, .task-status {
+  padding: 4px 8px;
+  border-radius: 10px;
   font-size: 0.8rem;
-  font-weight: 500;
-  text-transform: uppercase;
 }
 
-.status.active {
-  background: linear-gradient(45deg, #ffc107, #ff9800);
-  color: #333;
-}
-
-.status.completed {
-  background: linear-gradient(45deg, #28a745, #20c997);
+.challenge-type {
+  background: #007bff;
   color: white;
 }
 
+.status.active, .task-status.pending {
+  background: #ffc107;
+  color: #333;
+}
+
+.status.completed, .task-status.completed {
+  background: #28a745;
+  color: white;
+}
+
+.challenge-description, .task-description {
+  color: #666;
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+
+.challenge-details, .task-details {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.duration, .requirements, .task-type, .task-due-date {
+  background: #e9ecef;
+  color: #495057;
+  padding: 4px 8px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+}
+
 .progress-info {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .progress-bar {
   width: 100%;
-  height: 12px;
+  height: 8px;
   background: #e9ecef;
-  border-radius: 6px;
+  border-radius: 4px;
   overflow: hidden;
-  margin-bottom: 10px;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 8px;
 }
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(45deg, #28a745, #20c997);
-  border-radius: 6px;
-  transition: width 0.5s ease;
+  background: #28a745;
+  border-radius: 4px;
 }
 
 .progress-text {
   color: #666;
-  font-weight: 500;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
 .daily-progress {
   display: flex;
-  gap: 8px;
-  margin-bottom: 15px;
+  gap: 5px;
+  margin-bottom: 10px;
   flex-wrap: wrap;
 }
 
 .day-indicator {
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
   font-weight: bold;
-  font-size: 1.2rem;
-  border: 2px solid #dee2e6;
-}
-
-.day-indicator:hover {
-  transform: scale(1.1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.day-indicator.completed {
-  background: linear-gradient(45deg, #28a745, #20c997);
-  color: white;
-  border-color: #28a745;
-}
-
-.day-indicator:not(.completed) {
+  font-size: 0.9rem;
+  border: 1px solid #dee2e6;
   background: white;
   color: #6c757d;
 }
 
+.day-indicator.completed {
+  background: #28a745;
+  color: white;
+  border-color: #28a745;
+}
+
 .challenge-tip {
   color: #6c757d;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-style: italic;
   text-align: center;
   margin: 0;
 }
 
-/* Task Form Modal */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  backdrop-filter: blur(5px);
 }
 
 .modal {
   background: white;
-  padding: 30px;
-  border-radius: 20px;
+  padding: 20px;
+  border-radius: 5px;
   width: 90%;
-  max-width: 500px;
+  max-width: 400px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
 .modal h2 {
-  color: #333;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   text-align: center;
-  font-size: 1.8rem;
+  font-size: 1.3rem;
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 5px;
   color: #555;
-  font-weight: 500;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
   width: 100%;
-  padding: 12px 16px;
-  border: 2px solid #e1e5e9;
-  border-radius: 10px;
-  font-size: 16px;
-  transition: border-color 0.3s ease;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  font-size: 14px;
   box-sizing: border-box;
-  font-family: inherit;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: #667eea;
 }
 
 .form-group textarea {
   resize: vertical;
-  min-height: 80px;
+  min-height: 60px;
 }
 
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 15px;
+  gap: 10px;
 }
 
 .form-actions {
   display: flex;
-  gap: 15px;
-  margin-top: 30px;
+  gap: 10px;
+  margin-top: 20px;
 }
 
 .form-actions button {
   flex: 1;
-  padding: 12px 24px;
+  padding: 8px 16px;
   border: none;
-  border-radius: 10px;
+  border-radius: 3px;
   cursor: pointer;
-  font-size: 16px;
-  transition: all 0.3s ease;
 }
 
 .form-actions button:first-child {
@@ -385,164 +285,31 @@
 }
 
 .form-actions button:last-child {
-  background: linear-gradient(45deg, #667eea, #764ba2);
+  background: #007bff;
   color: white;
 }
 
-.form-actions button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* Empty State */
 .empty-state {
   text-align: center;
-  padding: 60px 20px;
+  padding: 40px 20px;
   color: #666;
 }
 
 .empty-icon {
-  font-size: 4rem;
-  margin-bottom: 20px;
+  font-size: 2rem;
+  margin-bottom: 15px;
   opacity: 0.5;
 }
 
 .empty-state h3 {
-  color: #333;
-  margin-bottom: 10px;
-  font-size: 1.5rem;
+  margin-bottom: 8px;
+  font-size: 1.2rem;
 }
 
 .empty-state p {
-  color: #999;
-  font-size: 1rem;
-  line-height: 1.5;
-}
-
-/* Tasks Grid Styles */
-.tasks-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 25px;
-}
-
-.task-card {
-  background: #f8f9fa;
-  border-radius: 20px;
-  padding: 25px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  border-left: 4px solid #17a2b8;
-}
-
-.task-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-
-.task-card.completed {
-  border-left-color: #28a745;
-  opacity: 0.8;
-}
-
-.task-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.task-header h4 {
-  color: #333;
-  margin: 0;
-  font-size: 1.3rem;
-}
-
-.task-status {
-  padding: 6px 12px;
-  border-radius: 15px;
-  font-size: 0.8rem;
-  font-weight: 500;
-  text-transform: uppercase;
-}
-
-.task-status.pending {
-  background: linear-gradient(45deg, #ffc107, #ff9800);
-  color: #333;
-}
-
-.task-status.completed {
-  background: linear-gradient(45deg, #28a745, #20c997);
-  color: white;
-}
-
-.task-description {
-  color: #666;
-  margin-bottom: 20px;
-  line-height: 1.5;
-}
-
-.task-details {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 20px;
-}
-
-.task-type, .task-due-date {
-  background: #e9ecef;
-  color: #495057;
-  padding: 8px 16px;
-  border-radius: 20px;
+  color: #999;   
   font-size: 0.9rem;
-  font-weight: 500;
 }
 
-.complete-task-btn {
-  background: linear-gradient(45deg, #28a745, #20c997);
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 25px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: all 0.3s ease;
-  width: 100%;
-}
 
-.complete-task-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
-}
 
-@media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    gap: 20px;
-    text-align: center;
-  }
-  
-  .header h1 {
-    font-size: 2rem;
-  }
-  
-  .tabs {
-    flex-direction: column;
-  }
-  
-  .challenges-grid,
-  .user-challenges-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .form-row {
-    grid-template-columns: 1fr;
-  }
-  
-  .form-actions {
-    flex-direction: column;
-  }
-  
-  .daily-progress {
-    justify-content: center;
-  }
-}
