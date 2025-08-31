@@ -12,59 +12,34 @@ const Challenges = () => {
   useEffect(() => {
     loadAvailableChallenges();
     loadUserChallenges();
-    // tasks removed
   }, []);
 
   const loadAvailableChallenges = async () => {
-    try {
-      const response = await API.get('/challenges');
-      if (response.data.success) {
-        setAvailableChallenges(response.data.challenges);
-      }
-    } catch (error) {
-      console.error('Error loading challenges:', error);
+    const response = await API.get('/challenges');
+    if (response.data.success) {
+      setAvailableChallenges(response.data.challenges);
     }
   };
 
   const loadUserChallenges = async () => {
-    try {
-      const response = await API.get('/user-challenges');
-      if (response.data.success) {
-        setUserChallenges(response.data.user_challenges);
-      }
-    } catch (error) {
-      console.error('Error loading user challenges:', error);
+    const response = await API.get('/user-challenges');
+    if (response.data.success) {
+      setUserChallenges(response.data.user_challenges);
     }
   };
 
-  // tasks removed
-
   const handleJoinChallenge = async (challengeId) => {
-    try {
-      await API.post(`/challenges/${challengeId}/join`);
-      alert('Successfully joined the challenge!');
-      loadUserChallenges();
-    } catch (error) {
-      console.error('Error joining challenge:', error);
-      alert('Error joining challenge');
-    }
+    await API.post(`/challenges/${challengeId}/join`);
+    alert('Successfully joined the challenge!');
+    loadUserChallenges();
   };
 
   const handleCompleteDay = async (userChallengeId, day) => {
-    try {
-      await API.post(`/user-challenges/${userChallengeId}/complete-day`, { day });
-      alert('Day completed successfully!');
-      loadUserChallenges();
-      loadAvailableChallenges();
-    } catch (error) {
-      console.error('Error completing day:', error);
-      alert('Error completing day');
-    }
+    await API.post(`/user-challenges/${userChallengeId}/complete-day`, { day });
+    alert('Day completed successfully!');
+    loadUserChallenges();
+    loadAvailableChallenges();
   };
-
-  // tasks removed
-
-  // tasks removed
 
   const handleBack = () => {
     navigate('/home');
@@ -167,10 +142,6 @@ const Challenges = () => {
     </div>
   );
 
-  // tasks removed
-
-  // tasks removed
-
   return (
     <div className="challenges-container">
       <div className="header">
@@ -193,16 +164,12 @@ const Challenges = () => {
         >
           My Challenges ({userChallenges.length})
         </button>
-        {/* Tasks tab removed */}
       </div>
 
       <div className="content">
         {activeTab === 'available' && renderAvailableChallenges()}
         {activeTab === 'my-challenges' && renderUserChallenges()}
-        {/* Tasks view removed */}
       </div>
-
-      {/* Task form removed */}
     </div>
   );
 };

@@ -22,35 +22,23 @@ const Badges = () => {
   }, []);
 
   const loadUserProgress = async () => {
-    try {
-      const response = await API.get('/progress');
-      if (response.data.success) {
-        setProgress(response.data.progress);
-      }
-    } catch (error) {
-      console.error('Error loading progress:', error);
+    const response = await API.get('/progress');
+    if (response.data.success) {
+      setProgress(response.data.progress);
     }
   };
 
   const loadUserBadges = async () => {
-    try {
-      const response = await API.get('/badges');
-      if (response.data.success) {
-        setBadges(response.data.badges);
-      }
-    } catch (error) {
-      console.error('Error loading badges:', error);
+    const response = await API.get('/badges');
+    if (response.data.success) {
+      setBadges(response.data.badges);
     }
   };
 
   const loadUserMilestones = async () => {
-    try {
-      const response = await API.get('/milestones');
-      if (response.data.success) {
-        setMilestones(response.data.milestones);
-      }
-    } catch (error) {
-      console.error('Error loading milestones:', error);
+    const response = await API.get('/milestones');
+    if (response.data.success) {
+      setMilestones(response.data.milestones);
     }
   };
 

@@ -60,8 +60,8 @@ class FitnessChallenge:
         self.name = name
         self.description = description
         self.duration_days = duration_days
-        self.challenge_type = challenge_type  # 7-day, 30-day, etc.
-        self.requirements = requirements  # daily tasks
+        self.challenge_type = challenge_type 
+        self.requirements = requirements 
         self.created_at = datetime.utcnow()
 
 class UserChallenge:
@@ -70,7 +70,7 @@ class UserChallenge:
         self.challenge_id = challenge_id
         self.start_date = start_date
         self.end_date = end_date
-        self.progress = progress  # dict with day: completed status
+        self.progress = progress 
         self.completed = False
         self.completed_at = None
         self.created_at = datetime.utcnow()
@@ -80,7 +80,7 @@ class Task:
         self.user_id = user_id
         self.title = title
         self.description = description
-        self.task_type = task_type  # workout, nutrition, challenge
+        self.task_type = task_type  
         self.completed = completed
         self.due_date = due_date
         self.completed_at = None

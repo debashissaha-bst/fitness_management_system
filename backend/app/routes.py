@@ -21,17 +21,16 @@ predefined_challenges = [
     {"_id": "13", "name": "30-Day Running Challenge", "details": "Run regularly for 30 days.", "type": "30-Day", "duration": 30, "lvl": "Hard", "xp": 300},
     {"_id": "14", "name": "30-Day Strength Builder", "details": "Build strength over a month.", "type": "30-Day", "duration": 30, "lvl": "Hard", "xp": 300},
     {"_id": "15", "name": "30-Day Healthy Eating", "details": "Eat healthy for 30 days.", "type": "30-Day", "duration": 30, "lvl": "Medium", "xp": 250}
-]
+]  
 
 STATIC_CHALLENGE_MAP = {c["_id"]: c for c in predefined_challenges}
 
-# Create blueprints
 meal_plans_bp = Blueprint('meal_plans', __name__)
 badges_bp = Blueprint('badges', __name__)
 challenges_bp = Blueprint('challenges', __name__)
 preferences_bp = Blueprint('preferences', __name__)
 
-# User Preferences Routes
+
 @preferences_bp.route('/preferences', methods=['POST'])
 @jwt_required()
 def set_user_preferences():
@@ -39,13 +38,11 @@ def set_user_preferences():
         user_id = get_jwt_identity()
         data = request.get_json()
         
-        # Validate required fields
         required_fields = ['age_group', 'dietary_preference', 'fitness_goal']
         for field in required_fields:
             if field not in data:
                 return jsonify({'success': False, 'error': f'Missing required field: {field}'}), 400
         
-        # Validate field values
         valid_age_groups = ['young', 'adult', 'older']
         valid_dietary_preferences = ['vegetarian', 'non_vegetarian', 'no_sugar']
         valid_fitness_goals = ['weight_loss', 'weight_gain', 'stay_fit']
@@ -66,11 +63,9 @@ def set_user_preferences():
             'updated_at': datetime.utcnow()
         }
         
-        # Check if user already has preferences
         existing_preferences = mongo.db.user_preferences.find_one({'user_id': user_id})
         
         if existing_preferences:
-            # Update existing preferences
             result = mongo.db.user_preferences.update_one(
                 {'user_id': user_id},
                 {'$set': {
@@ -82,7 +77,6 @@ def set_user_preferences():
             )
             preferences['_id'] = str(existing_preferences['_id'])
         else:
-            # Create new preferences
             result = mongo.db.user_preferences.insert_one(preferences)
             preferences['_id'] = str(result.inserted_id)
         
@@ -109,27 +103,24 @@ def get_user_preferences():
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 400
 
-# Meal Generation Routes
 @preferences_bp.route('/generate-meal-plan', methods=['POST'])
 @jwt_required()
 def generate_meal_plan():
     try:
         user_id = get_jwt_identity()
         
-        # Check if user has preferences
         user_preferences = mongo.db.user_preferences.find_one({'user_id': user_id})
         
         if not user_preferences:
             return jsonify({'success': False, 'error': 'Please set your preferences first'}), 400
         
-        # Generate meal plan using the service
         meal_plan = meal_generation_service.generate_meal_plan(
             user_preferences['age_group'],
             user_preferences['dietary_preference'],
             user_preferences['fitness_goal']  
         )
         
-        # Save the generated meal plan
+        # Save the generated meal
         meal_plan_data = {
             'user_id': user_id,
             'date': datetime.utcnow(),
@@ -156,13 +147,12 @@ def get_meal_plan_history():
     try:
         user_id = get_jwt_identity()
         
-        # Get meal plans from the last 30 days
-        thirty_days_ago = datetime.utcnow() - timedelta(days=30)
+        x = datetime.utcnow() - timedelta(days=7) 
         
         meal_plans = list(mongo.db.generated_meal_plans.find({
             'user_id': user_id,
-            'generated_at': {'$gte': thirty_days_ago}
-        }).sort('generated_at', -1))
+            'generated_at': {'$gte': x}
+        }).sort('generated_at', -1)) 
         
         # Convert ObjectId to string and format dates
         for plan in meal_plans:
@@ -251,7 +241,7 @@ def update_meal_plan(meal_plan_id):
         data = request.get_json()
         
         update_data = {
-            'meal_name': data['meal_name'],
+            'meal_name': data['meal_name'],  
             'quantity': data['quantity']
         }
         
@@ -358,18 +348,16 @@ def get_available_challenges():
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 400
 
-@challenges_bp.route('/challenges/<challenge_id>/join', methods=['POST'])
+@challenges_bp.route('/challenges/<challenge_id>/join', methods=['POST']) 
 @jwt_required()
 def join_challenge(challenge_id):
     try:
         user_id = get_jwt_identity()
         
-        # Check if challenge exists in static list
         challenge = STATIC_CHALLENGE_MAP.get(str(challenge_id))
         if not challenge:
             return jsonify({'success': False, 'error': 'Challenge not found'}), 404
         
-        # Check if user already joined
         existing_user_challenge = mongo.db.user_challenges.find_one({
             'user_id': user_id,
             'challenge_id': challenge_id
@@ -378,11 +366,9 @@ def join_challenge(challenge_id):
         if existing_user_challenge:
             return jsonify({'success': False, 'error': 'Already joined this challenge'}), 400
         
-        # Create user challenge
         start_date = datetime.utcnow()
         end_date = start_date + timedelta(days=challenge['duration'])
         
-        # Initialize progress for each day
         progress = {}
         for i in range(challenge['duration']):
             day = (start_date + timedelta(days=i)).strftime('%Y-%m-%d')
@@ -518,6 +504,4 @@ def complete_challenge_day(user_challenge_id):
         
         return jsonify({'success': True, 'message': 'Day completed'}), 200
     except Exception as e:
-        return jsonify({'success': False, 'error': str(e)}), 400
-
-# Tasks Routes removed: users can only participate in predefined challenges
+        return jsonify({'success': False, 'error': str(e)}), 400 
