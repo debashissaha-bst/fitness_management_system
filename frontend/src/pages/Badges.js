@@ -22,23 +22,35 @@ const Badges = () => {
   }, []);
 
   const loadUserProgress = async () => {
-    const response = await API.get('/progress');
-    if (response.data.success) {
-      setProgress(response.data.progress);
+    try {
+      const response = await API.get('/progress');
+      if (response.data.success) {
+        setProgress(response.data.progress);
+      }
+    } catch (error) {
+      console.error('Error loading progress:', error);
     }
   };
 
   const loadUserBadges = async () => {
-    const response = await API.get('/badges');
-    if (response.data.success) {
-      setBadges(response.data.badges);
+    try {
+      const response = await API.get('/badges');
+      if (response.data.success) {
+        setBadges(response.data.badges);
+      }
+    } catch (error) {
+      console.error('Error loading badges:', error);
     }
   };
 
   const loadUserMilestones = async () => {
-    const response = await API.get('/milestones');
-    if (response.data.success) {
-      setMilestones(response.data.milestones);
+    try {
+      const response = await API.get('/milestones');
+      if (response.data.success) {
+        setMilestones(response.data.milestones);
+      }
+    } catch (error) {
+      console.error('Error loading milestones:', error);
     }
   };
 
@@ -49,7 +61,7 @@ const Badges = () => {
   const calculateProgressPercentage = () => {
     const currentLevel = progress.level;
     const currentExp = progress.experience;
-    const requiredExp = currentLevel * 100;
+    // const requiredExp = currentLevel * 100;
     const progressInLevel = currentExp % 100;
     return Math.min((progressInLevel / 100) * 100, 100);
   };
