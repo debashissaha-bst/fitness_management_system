@@ -70,11 +70,13 @@ def get_user_preferences():
     user_id = get_jwt_identity()
     
     preferences = mongo.db.user_preferences.find_one({'user_id': user_id})
-    
+    if not preferences:
+        return jsonify({'success': False, 'error': 'Preferences not found'}), 404
+
     preferences['_id'] = str(preferences['_id'])
     preferences['created_at'] = preferences['created_at'].isoformat()
     preferences['updated_at'] = preferences['updated_at'].isoformat()
-    
+
     return jsonify({'success': True, 'preferences': preferences}), 200
 
 @preferences_bp.route('/generate-meal-plan', methods=['POST'])
@@ -83,6 +85,8 @@ def generate_meal_plan():
     user_id = get_jwt_identity()
     
     user_preferences = mongo.db.user_preferences.find_one({'user_id': user_id})
+    if not user_preferences:
+        return jsonify({'success': False, 'error': 'Please set your preferences first'}), 400
     
     meal_plan = meal_generation_service.generate_meal_plan(
         user_preferences['age_group'],
@@ -133,6 +137,8 @@ def get_available_meals():
     user_id = get_jwt_identity()
     
     user_preferences = mongo.db.user_preferences.find_one({'user_id': user_id})
+    if not user_preferences:
+        return jsonify({'success': False, 'error': 'Please set your preferences first'}), 400
     
     filtered_meals = meal_generation_service.filter_meals_by_preferences(
         user_preferences['age_group'],

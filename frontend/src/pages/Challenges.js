@@ -127,7 +127,7 @@ const Challenges = () => {
                   onClick={() => !completed && handleCompleteDay(userChallenge._id, day)}
                   title={day}
                 >
-                  {completed ? '✓' : '○'}
+                  {'.'}
                 </div>
               ))}
             </div>
