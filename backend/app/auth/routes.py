@@ -247,8 +247,7 @@ def get_profile():
 @auth_bp.route('/api/auth/logout', methods=['POST'])
 @jwt_required()
 def logout():
-    # In a real application, you might want to blacklist the token
-    # For now, we'll just return a success message
+
     return jsonify({
         'success': True,
         'message': 'Logged out successfully'
@@ -285,8 +284,7 @@ def calculate_health_metrics():
         # Calculate BMI: BMI = weight(kg) / height(m)^2
         bmi = weight / (height_in_meters * height_in_meters)
         
-        # Calculate Body Fat Percentage: BFP = 1.20⋅BMI + 0.23⋅age − 10.8⋅gender − 5.4
-        # Gender: 1 for male, 0 for female
+
         gender_value = 1 if gender.lower() == 'male' else 0
         bfp = 1.20 * bmi + 0.23 * age - 10.8 * gender_value - 5.4
         

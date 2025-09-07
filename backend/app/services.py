@@ -88,20 +88,18 @@ class MealGenerationService:
         """Generate a meal plan using genetic algorithm"""
         filtered_meals = self.filter_meals_by_preferences(age_group, dietary_preference, fitness_goal)
         
-        # Ensure we have enough options overall
         if len(filtered_meals) < 3:
             filtered_meals = self._get_fallback_meals(age_group, dietary_preference, fitness_goal)
         
-        # Use genetic algorithm to optimize meal selection
-        best_meal_plan = self._genetic_algorithm_optimization(filtered_meals, fitness_goal)
+        # best meal plan
+        best_plan = self._genetic_algorithm_optimization(filtered_meals, fitness_goal)  
         
-        return best_meal_plan
+        return best_plan 
     
     def _get_fallback_meals(self, age_group: str, dietary_preference: str, fitness_goal: str) -> List[Dict]:
         """Get fallback meals when strict filtering doesn't provide enough options"""
-        fallback_meals: List[Dict] = []
+        backup_meal: List[Dict] = []
         for meal in self.meals_database:
-            # Relax some constraints: still align with dietary preference and goal
             tags = meal["tags"]
             if dietary_preference == "vegetarian" and "non_vegetarian" in tags:
                 continue
@@ -109,10 +107,10 @@ class MealGenerationService:
                 continue
             if fitness_goal not in tags:
                 continue
-            fallback_meals.append(meal)
-            if len(fallback_meals) >= 9:
+            backup_meal.append(meal)
+            if len(backup_meal) >= 9:  
                 break
-        return fallback_meals
+        return backup_meal
     
     def _genetic_algorithm_optimization(self, filtered_meals: List[Dict], fitness_goal: str) -> Dict[str, Any]:
         """Optimize meal selection using genetic algorithm"""
@@ -120,8 +118,8 @@ class MealGenerationService:
         generations = 100
         mutation_rate = 0.1
         
-        # Initialize population
-        population = self._initialize_population(filtered_meals, population_size)
+        # population Initialization 
+        population = self._initialize_population(filtered_meals, population_size) 
         
         # Evolution loop
         for generation in range(generations):
@@ -167,7 +165,6 @@ class MealGenerationService:
         
         fitness_score = 100.0
         
-        # Bonus for variety (different meals)
         if len(set(individual)) == 3:
             fitness_score += 20
         
@@ -179,7 +176,7 @@ class MealGenerationService:
         else:  # stay_fit
             fitness_score += 10
         
-        return fitness_score
+        return fitness_score 
     
     def _tournament_selection(self, population: List[List[int]], fitness_scores: List[float]) -> List[int]:
         """Tournament selection for parent selection"""
